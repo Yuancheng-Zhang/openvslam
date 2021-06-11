@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.1)
 project(openvslam LANGUAGES CXX C)
 
+# 解决找不到Eigen3的问题
+include_directories("/usr/include/eigen3")
+
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
