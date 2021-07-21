@@ -11,6 +11,7 @@ equirectangular::equirectangular(const std::string& name, const color_order_t& c
     : base(name, setup_type_t::Monocular, model_type_t::Equirectangular, color_order, cols, rows, fps, 0.0, 0.0) {
     spdlog::debug("CONSTRUCT: camera::equirectangular");
 
+    //return image_bounds{0.0, cols_, 0.0, rows_};
     img_bounds_ = compute_image_bounds();
 
     inv_cell_width_ = static_cast<double>(num_grid_cols_) / (img_bounds_.max_x_ - img_bounds_.min_x_);
