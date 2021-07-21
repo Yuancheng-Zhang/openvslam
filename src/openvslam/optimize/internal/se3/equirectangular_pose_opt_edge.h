@@ -78,11 +78,11 @@ inline void equirectangular_pose_opt_edge::linearizeOplus() {
     const auto pcz = pos_c(2);
     const auto L = pos_c.norm();
 
-    // 回転に対する微分
+    // 回転に対する微分 / 对旋转微分
     const Vec3_t d_pc_d_rx(0, -pcz, pcy);
     const Vec3_t d_pc_d_ry(pcz, 0, -pcx);
     const Vec3_t d_pc_d_rz(-pcy, pcx, 0);
-    // 並進に対する微分
+    // 並進に対する微分 / 对平移微分
     const Vec3_t d_pc_d_tx(1, 0, 0);
     const Vec3_t d_pc_d_ty(0, 1, 0);
     const Vec3_t d_pc_d_tz(0, 0, 1);
@@ -102,7 +102,7 @@ inline void equirectangular_pose_opt_edge::linearizeOplus() {
     // 導関数ベクトル d_L_d_x を作成
     const Vec6_t d_L_d_x = (1.0 / L) * (pcx * d_pcx_d_x + pcy * d_pcy_d_x + pcz * d_pcz_d_x);
 
-    // ヤコビ行列を作成
+    // ヤコビ行列を作成 Create jacobian matrix
     MatRC_t<2, 6> jacobian = MatRC_t<2, 6>::Zero();
     jacobian.block<1, 6>(0, 0) = -(cols_ / (2 * M_PI)) * (1.0 / (pcx * pcx + pcz * pcz))
                                  * (pcz * d_pcx_d_x - pcx * d_pcz_d_x);
